@@ -17,4 +17,4 @@ COPY . /code
 WORKDIR /code
 
 # при старте контейнера запустить gunicorn 
-CMD gunicorn --bind 0.0.0.0:8000 api_yamdb.wsgi:application
+CMD gunicorn api_yamdb.wsgi:application --bind 0.0.0.0:8000 
