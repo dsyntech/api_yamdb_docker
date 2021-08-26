@@ -1,36 +1,32 @@
-# REST API to YamDB service
-Stack: Django, Django REST Framework, PostgreSQL, Simple-JWT, Gunicorn, Docker, nginx, git
+# REST API для YamDB
+Данное приложение предоставляет REST API для создания произведений с отзывами.
 
-This app provides API for creating titles with reviews.
-You shall run the following commands in project folder to startup the app.
+### Технологии
+Django, Django REST Framework, PostgreSQL, Simple-JWT, Gunicorn, Docker, nginx, git
 
-To test functionality:
-### 1. Prepare workspace
+## Запуск проекта
+### 0. Перейти в директорию проекта с docker-compose.yaml
+### 1. Собрать и запустить контейнеры Docker
 ```bash
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
+docker-compose up --build -d
 ```
 
-### 2. Create project database and migrate it
+### 2. Создать администратора Django
 ```bash
-python manage.py migrate
+docker-compose exec web python manage.py createsuperuser
 ```
+Введите почту и пароль в интерактивном режиме.
 
-### 3. FIll the database with default data
+### 3. Заполнить базу данных тестовыми данными
 ```bash
-python manage.py import_data
+docker-compose exec web python manage.py import_data
 ```
+Дождитесь окончания импорта.
 
-### 4. Create admin
-```bash
-python manage.py createsuperuser
-```
+### 4. Открыть браузер
+- Корневое представление API по умолчанию: http://localhost/api/v1/
+- Админка: http://localhost/admin
+- Документация: http://localhost/redoc
 
-### 5. Start the app
-```bash
-python manage.py runserver
-```
-### 6. Enjoy!
-
-See documentation to REST API on http://localhost:8000/redoc
+### Автор
+Илья Боюр
